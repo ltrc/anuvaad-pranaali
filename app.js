@@ -66,7 +66,11 @@ app.post('/:src/:tgt/:start/:end', function (req, res) {
        tgt = req.params.tgt,
        start = Number(req.params.start),
        end = Number(req.params.end);
-   callAPI(src, tgt, start - 1, end, new Buffer(req.body.input).toString('base64'), {}, res);
+   if (start <= end) {
+        callAPI(src, tgt, start - 1, end, new Buffer(req.body.input).toString('base64'), {}, res);
+   } else {
+        res.send('{"Error": "Invalid Request"}');
+   }
 });
 
 var server = app.listen(3000, function () {
