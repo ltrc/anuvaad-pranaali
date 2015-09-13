@@ -102,5 +102,13 @@
                 "params": {}
             }
         ]
+    },
+    "pan": {
+        "hin": [
+            {
+                "funcName": "tokenizer",
+                "params": {}
+            }
+        ]
     }
 }
