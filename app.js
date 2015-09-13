@@ -49,7 +49,8 @@ if (cluster.isMaster) {
         var api = langPairs[src][tgt][start];
         var params = api.params;
         params.data = data;
-        params.lang = src;
+        params.src_lang = src;
+        params.tgt_lang = tgt;
         var postData= querystring.stringify(params);
         var options = {
               hostname: 'localhost',
