@@ -108,6 +108,10 @@
             {
                 "funcName": "tokenizer",
                 "params": {}
+            },
+            {
+                "funcName": "morph",
+                "params": {}
             }
         ]
     }
