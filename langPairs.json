@@ -112,6 +112,10 @@
             {
                 "funcName": "morph",
                 "params": {}
+            },
+            {
+                "funcName": "postagger",
+                "params": {}
             }
         ]
     }
