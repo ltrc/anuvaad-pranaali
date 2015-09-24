@@ -10,7 +10,8 @@
                 "params": {
                     "type": "ssf",
                     "src": "utf",
-                    "tgt": "wx"
+                    "tgt": "wx",
+                    "lang": "hin"
                  }
             },
             {
@@ -62,7 +63,8 @@
                 "params": {
                     "type": "ssf",
                     "src": "wx",
-                    "tgt": "utf"
+                    "tgt": "utf",
+                    "lang": "hin"
                 }
             },
             {
