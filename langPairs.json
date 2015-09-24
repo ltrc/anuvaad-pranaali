@@ -118,6 +118,92 @@
             {
                 "funcName": "postagger",
                 "params": {}
+            },
+            {
+                "funcName": "chunker",
+                "params": {}
+            },
+            {
+                "funcName": "pruning",
+                "params": {}
+            },
+            {
+                "funcName": "guessmorph",
+                "params": {}
+            },
+            {
+                "funcName": "pickonemorph",
+                "params": {}
+            },
+            {
+                "funcName": "computehead",
+                "params": {}
+            },
+            {
+                "funcName": "computevibhakti",
+                "params": {}
+            },
+            {
+                "funcName": "parse",
+                "params": {}
+            },
+            {
+                "funcName": "transfergrammar",
+                "params": {}
+            },
+            {
+                "funcName": "lexicaltransfer",
+                "params": {}
+            },
+            {
+                "funcName": "transliterate",
+                "params": {}
+            },
+            {
+                "funcName": "convert_notation",
+                "params": {
+                    "type": "ssf",
+                    "src": "utf",
+                    "tgt": "wx",
+                    "lang": "hin"
+                 }
+            },
+            {
+                "funcName": "agreementfeature",
+                "params": {}
+            },
+            {
+                "funcName": "vibhaktispliter",
+                "params": {}
+            },
+            {
+                "funcName": "interchunk",
+                "params": {}
+            },
+            {
+                "funcName": "intrachunk",
+                "params": {}
+            },
+            {
+                "funcName": "agreementdistribution",
+                "params": {}
+            },
+            {
+                "funcName": "defaultfeatures",
+                "params": {}
+            },
+            {
+                "funcName": "wordgenerator",
+                "params": {}
+            },
+            {
+                "funcName": "convert_notation",
+                "params": {
+                    "type": "ssf",
+                    "src": "wx",
+                    "tgt": "utf",
+                    "lang": "hin"
+                }
             }
         ]
     }
