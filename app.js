@@ -105,6 +105,17 @@ if (cluster.isMaster) {
        }
     });
 
+    app.get('/langpairs', function (req, res) {
+        var lp = {};
+        for (var src in langPairs) {
+            lp[src] = [];
+                for (var tgt in langPairs[src]) {
+                    lp[src].push(tgt);
+                }
+        }
+        res.send(lp);
+    });
+
     // Bind to a port
     app.listen(3000);
 
