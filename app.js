@@ -116,6 +116,16 @@ if (cluster.isMaster) {
         res.send(lp);
     });
 
+    app.get('/:src/:tgt/modules', function (req, res) {
+        var modules = [];
+        var src = req.params.src,
+            tgt = req.params.tgt;
+        for (var module in langPairs[src][tgt]) {
+            modules.push(langPairs[src][tgt][module]['funcName']);
+        }
+        res.send(modules);
+    });
+
     // Bind to a port
     app.listen(3000);
 
