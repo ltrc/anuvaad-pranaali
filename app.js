@@ -1,5 +1,4 @@
 var http = require('http');
-var http = require('http');
 var querystring = require('querystring');
 var langPairs = require('./langPairs.json');
 var path = require('path');
