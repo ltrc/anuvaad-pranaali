@@ -1,4 +1,5 @@
 var http = require('http');
+var deepcopy = require('deepcopy');
 var querystring = require('querystring');
 var langPairs = require('./langPairs.json');
 var path = require('path');
@@ -44,13 +45,20 @@ if (cluster.isMaster) {
     app.use("/css", express.static(__dirname + '/css'));
     app.use("/js", express.static(__dirname + '/js'));
 
-    function callAPI(src, tgt, start, end, data, result, res) {
+    function callAPI(src, tgt, start, end, userParams, result, res) {
         var api = langPairs[src][tgt][start];
-        var params = api.params;
-        params.data = data;
+        var params = deepcopy(api.params);
         params.src_lang = src;
         params.tgt_lang = tgt;
-        var postData= querystring.stringify(params);
+        Object.keys(userParams).forEach(function(key) {
+              params[key] = userParams[key];
+        });
+        /* Backwards compatibility: User can pass sentence in param key in {data, input} */
+        if (!params.data) {
+            params.data = params.input;
+            delete params.input;
+        }
+        var postData = querystring.stringify(params);
         var options = {
               hostname: 'localhost',
               port: 5000,
@@ -73,7 +81,9 @@ if (cluster.isMaster) {
            if (start == end) {
               res.send(result);
            } else {
-             callAPI(src, tgt, start, end, str, result, res);
+             userParams = {};
+             userParams.data = str;
+             callAPI(src, tgt, start, end, userParams, result, res);
            }
          });
        }
@@ -97,8 +107,10 @@ if (cluster.isMaster) {
 
        //console.log("Request received by worker:" +  cluster.worker.id);
 
+       req.body.input = new Buffer(req.body.input).toString('base64');
+
        if (start <= end) {
-            callAPI(src, tgt, start - 1, end, new Buffer(req.body.input).toString('base64'), {}, res);
+            callAPI(src, tgt, start - 1, end, req.body, {}, res);
        } else {
             res.send('{"Error": "Invalid Request"}');
        }
