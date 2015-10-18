@@ -5,6 +5,7 @@ var langPairs = require('./langPairs.json');
 var path = require('path');
 var bodyParser = require('body-parser');
 var cluster = require('cluster');
+var express = require('express');
 
 // Code to run if we're in the master process
 if (cluster.isMaster) {
@@ -28,9 +29,6 @@ if (cluster.isMaster) {
 
 // Code to run if we're in a worker process
 } else {
-
-    // Include Express
-    var express = require('express');
 
     // Create a new Express application
     var app = express();
