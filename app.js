@@ -6,6 +6,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cluster = require('cluster');
 var express = require('express');
+var morgan = require('morgan');
 
 // Code to run if we're in the master process
 if (cluster.isMaster) {
@@ -34,6 +35,7 @@ if (cluster.isMaster) {
     var app = express();
 
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(morgan('combined'))
 
     app.get('/', function (req, res) {
       res.sendFile(path.join(__dirname, './', 'index.html'));
