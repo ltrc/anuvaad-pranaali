@@ -6,7 +6,7 @@
                 "params": {}
             },
             {
-                "funcName": "convert_notation",
+                "funcName": "utf2wx",
                 "params": {
                     "type": "ssf",
                     "src": "utf",
@@ -59,7 +59,7 @@
                 "params": {}
             },
             {
-                "funcName": "convert_notation",
+                "funcName": "wx2utf",
                 "params": {
                     "type": "ssf",
                     "src": "wx",
@@ -160,7 +160,7 @@
                 "params": {}
             },
             {
-                "funcName": "convert_notation",
+                "funcName": "utf2wx",
                 "params": {
                     "type": "ssf",
                     "src": "utf",
@@ -197,7 +197,7 @@
                 "params": {}
             },
             {
-                "funcName": "convert_notation",
+                "funcName": "wx2utf",
                 "params": {
                     "type": "ssf",
                     "src": "wx",
