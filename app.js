@@ -53,7 +53,8 @@ if (cluster.isMaster) {
         Object.keys(userParams).forEach(function(key) {
               params[key] = userParams[key];
         });
-        /* Backwards compatibility: User can pass sentence any of the param keys {data, input} */
+        /* Backward compatibility: User can pass sentence in any of the param
+         * keys: {data, input} */
         if (!params.data) {
             params.data = params.input;
             delete params.input;
