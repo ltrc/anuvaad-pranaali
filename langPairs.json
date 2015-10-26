@@ -103,6 +103,88 @@
                 "funcName": "wordgenerator",
                 "params": {}
             }
+        ],
+        "urd": [
+            {
+                "funcName": "tokenizer",
+                "params": {}
+            },
+            {
+                "funcName": "utf2wx",
+                "params": {
+                    "type": "ssf",
+                    "src": "utf",
+                    "tgt": "wx",
+                    "lang": "hin"
+                 }
+            },
+            {
+                "funcName": "morph",
+                "params": {}
+            },
+            {
+                "funcName": "postagger",
+                "params": {}
+            },
+            {
+                "funcName": "pruning",
+                "params": {}
+            },
+            {
+                "funcName": "pickonemorph",
+                "params": {}
+            },
+            {
+                "funcName": "chunker",
+                "params": {
+                    "depsOn": [
+                        "pickonemorph"
+                    ]
+                }
+            },
+            {
+                "funcName": "multiwordexpr",
+                "params": {
+                    "depsOn": [
+                        "pickonemorph"
+                    ]
+                }
+            },
+            {
+                "funcName": "ner",
+                "params": {
+                    "depsOn": [
+                        "utf2wx"
+                    ]
+                }
+            },
+            {
+                "funcName": "merger",
+                 "params": {
+                    "depsOn": [
+                        "ner",
+                        "multiwordexpr",
+                        "chunker"
+                    ]
+                }
+            },
+            {
+                "funcName": "headcomputation",
+                "params": {}
+            },
+            {
+                "funcName": "wx2utf",
+                "params": {
+                    "type": "ssf",
+                    "src": "wx",
+                    "tgt": "utf",
+                    "lang": "hin"
+                }
+            },
+            {
+                "funcName": "lexicaltransfer",
+                "params": {}
+            }
         ]
     },
     "pan": {
