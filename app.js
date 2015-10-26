@@ -45,7 +45,7 @@ if (cluster.isMaster) {
     app.use("/css", express.static(__dirname + '/css'));
     app.use("/js", express.static(__dirname + '/js'));
 
-    function callAPI(src, tgt, start, end, userParams, result, res) {
+    function callAPI(src, tgt, start, end, userParams, result, result_b64, res) {
         var api = langPairs[src][tgt][start];
         var params = deepcopy(api.params);
         params.src_lang = src;
@@ -58,6 +58,23 @@ if (cluster.isMaster) {
         if (!params.data) {
             params.data = params.input;
             delete params.input;
+        }
+        /* If a particular module wants input from module(s) not occurring
+         * strictly just before it (sequentially), then look at the 'depsOn'
+         * field of that module in the json and, if the dependency is single,
+         * fill params.data, otherwise fill each input as a post parameter,
+         * like params.input1, params.input2. In the latter case, the internal
+         * module has to be intelligent enough to interpret multiple POST
+         * parameters suitably */
+        if (params.depsOn) {
+            if (params.depsOn.length == 1) {
+                params.data = result_b64[params.depsOn[0]];
+            } else {
+                for (var i in params.depsOn) {
+                    var dep = params.depsOn[i];
+                    params[dep] = result_b64[dep];
+                }
+            }
         }
         var postData = querystring.stringify(params);
         var options = {
@@ -79,12 +96,13 @@ if (cluster.isMaster) {
          });
          response.on('end', function () {
            result[api.funcName + "-" + start] = new Buffer(str, 'base64').toString();
+           result_b64[api.funcName] = str;
            if (start == end) {
               res.send(result);
            } else {
              userParams = {};
              userParams.data = str;
-             callAPI(src, tgt, start, end, userParams, result, res);
+             callAPI(src, tgt, start, end, userParams, result, result_b64, res);
            }
          });
        }
@@ -111,7 +129,7 @@ if (cluster.isMaster) {
        req.body.input = new Buffer(req.body.input).toString('base64');
 
        if (start <= end) {
-            callAPI(src, tgt, start - 1, end, req.body, {}, res);
+            callAPI(src, tgt, start - 1, end, req.body, {}, {}, res);
        } else {
             res.send('{"Error": "Invalid Request"}');
        }
