@@ -125,8 +125,11 @@ if (cluster.isMaster) {
            end = Number(req.params.end);
 
        //console.log("Request received by worker:" +  cluster.worker.id);
-
        req.body.input = new Buffer(req.body.input).toString('base64');
+
+       if (!langPairs[src][tgt]) {
+           res.send('{"Error": "Invalid Language Pair"}');
+       }
 
        if (start <= end) {
             callAPI(src, tgt, start - 1, end, req.body, {}, {}, res);
