@@ -226,10 +226,6 @@
                     "tgt": "utf",
                     "lang": "urd"
                 }
-            },
-            {
-                "funcName": "nes",
-                "params": {}
             }
         ]
     },
