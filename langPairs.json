@@ -330,5 +330,120 @@
                 }
             }
         ]
+    },
+    "urd": {
+        "hin": [
+            {
+                "funcName": "tokenizer",
+                "params": {}
+            },
+            {
+                "funcName": "utf2wx_urd",
+                "params": {
+                    "type": "ssf",
+                    "src": "utf",
+                    "tgt": "wx",
+                    "lang": "urd",
+                    "lol": "lol"
+                 }
+            },
+            {
+                "funcName": "morph",
+                "params": {}
+            },
+            {
+                "funcName": "wx2utf_urd",
+                "params": {
+                    "type": "ssf",
+                    "src": "wx",
+                    "tgt": "utf",
+                    "lang": "urd"
+                 }
+            },
+            {
+                "funcName": "postagger",
+                "params": {}
+            },
+            {
+                "funcName": "utf2wx_urd",
+                "params": {
+                    "type": "ssf",
+                    "src": "utf",
+                    "tgt": "wx",
+                    "lang": "urd"
+                 }
+            },
+            {
+                "funcName": "chunker",
+                "params": {}
+            },
+            {
+                "funcName": "pruning",
+                "params": {}
+            },
+            {
+                "funcName": "pickonemorph",
+                "params": {}
+            },
+            {
+                "funcName": "computehead",
+                "params": {}
+            },
+            {
+                "funcName": "wx2utf_urd",
+                "params": {
+                    "type": "ssf",
+                    "src": "wx",
+                    "tgt": "utf",
+                    "lang": "urd"
+                 }
+            },
+            {
+                "funcName": "lexicaltransfer",
+                "params": {}
+            },
+            {
+                "funcName": "transliterate",
+                "params": {}
+            },
+            {
+                "funcName": "utf2wx",
+                "params": {
+                    "type": "ssf",
+                    "src": "utf",
+                    "tgt": "wx",
+                    "lang": "hin"
+                 }
+            },
+            {
+                "funcName": "agreementfeature",
+                "params": {}
+            },
+            {
+                "funcName": "interchunk",
+                "params": {}
+            },
+            {
+                "funcName": "intrachunk",
+                "params": {}
+            },
+            {
+                "funcName": "defaultfeatures",
+                "params": {}
+            },
+            {
+                "funcName": "wordgenerator",
+                "params": {}
+            },
+            {
+                "funcName": "wx2utf",
+                "params": {
+                    "type": "ssf",
+                    "src": "wx",
+                    "tgt": "utf",
+                    "lang": "hin"
+                 }
+            }
+        ]
     }
 }
