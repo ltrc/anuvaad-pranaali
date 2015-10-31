@@ -33,7 +33,7 @@ if (cluster.isMaster) {
 
     // Create a new Express application
     var app = express();
-
+    app.enable('trust proxy');
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(morgan('combined'))
 
