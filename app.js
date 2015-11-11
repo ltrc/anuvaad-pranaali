@@ -42,6 +42,7 @@ if (cluster.isMaster) {
     });
 
     app.use("/images", express.static(__dirname + '/images'));
+    app.use("/fonts", express.static(__dirname + '/fonts'));
     app.use("/css", express.static(__dirname + '/css'));
     app.use("/js", express.static(__dirname + '/js'));
 
