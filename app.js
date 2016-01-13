@@ -55,12 +55,6 @@ if (cluster.isMaster) {
         Object.keys(userParams).forEach(function(key) {
               params[key] = userParams[key];
         });
-        /* Backward compatibility: User can pass sentence in any of the param
-         * keys: {data, input} */
-        if (!params.data) {
-            params.data = params.input;
-            delete params.input;
-        }
         /* If a particular module wants input from module(s) not occurring
          * strictly just before it (sequentially), then look at the 'depsOn'
          * field of that module in the json and, if the dependency is single,
@@ -69,13 +63,18 @@ if (cluster.isMaster) {
          * module has to be intelligent enough to interpret multiple POST
          * parameters suitably */
         if (params.depsOn) {
-            if (params.depsOn.length == 1) {
-                params.data = result_b64[params.depsOn[0]];
-            } else {
-                for (var i in params.depsOn) {
-                    var dep = params.depsOn[i];
+            for (var i in params.depsOn) {
+                var dep = params.depsOn[i];
+                /* First, check in result_b64 hash. If not found, then user
+                 * is expected to pass the parameter */
+                if (result_b64[dep]) {
                     params[dep] = result_b64[dep];
+                } else {
+                    params[dep] = new Buffer(params[dep]).toString('base64');
                 }
+            }
+            if (params.depsOn.length == 1) {
+                params.data = params[params.depsOn[0]];
             }
         }
         var postData = querystring.stringify(params);
@@ -126,8 +125,14 @@ if (cluster.isMaster) {
            start = Number(req.params.start),
            end = Number(req.params.end);
 
-       //console.log("Request received by worker:" +  cluster.worker.id);
-       req.body.input = new Buffer(req.body.input).toString('base64');
+       //console.log("Request received by worker:" + cluster.worker.id);
+
+       /* Backward compatibility: User can pass sentence in any of the param
+        * keys: {data, input} */
+       var data = req.body.data || req.body.input;
+       if (data) {
+           req.body.data = new Buffer(data).toString('base64');
+       }
 
        if (!langPairs[src][tgt]) {
            res.send('{"Error": "Invalid Language Pair"}');
